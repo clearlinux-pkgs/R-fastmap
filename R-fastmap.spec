@@ -4,7 +4,7 @@
 #
 Name     : R-fastmap
 Version  : 1.0.1
-Release  : 2
+Release  : 3
 URL      : https://cran.r-project.org/src/contrib/fastmap_1.0.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fastmap_1.0.1.tar.gz
 Summary  : Fast Implementation of a Key-Value Store
