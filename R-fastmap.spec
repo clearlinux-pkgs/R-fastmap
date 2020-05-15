@@ -4,7 +4,7 @@
 #
 Name     : R-fastmap
 Version  : 1.0.1
-Release  : 5
+Release  : 6
 URL      : https://cran.r-project.org/src/contrib/fastmap_1.0.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fastmap_1.0.1.tar.gz
 Summary  : Fast Implementation of a Key-Value Store
@@ -12,16 +12,12 @@ Group    : Development/Tools
 License  : MIT
 Requires: R-fastmap-lib = %{version}-%{release}
 BuildRequires : buildreq-R
-BuildRequires : util-linux
 
 %description
-fastmap
-=======
-<!-- badges: start -->
-[![Travis build status](https://travis-ci.org/r-lib/fastmap.svg?branch=master)](https://travis-ci.org/r-lib/fastmap)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/r-lib/fastmap?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/fastmap)
-[![CRAN status](https://www.r-pkg.org/badges/version/fastmap)](https://cran.r-project.org/package=fastmap)
-<!-- badges: end -->
+used as key-value stores, but every time a new key is used, it is added to
+    R's global symbol table, causing a small amount of memory leakage. This can
+    be problematic in cases where many different keys are used. Fastmap avoids
+    this memory leak issue by implementing the map using data structures in C++.
 
 %package lib
 Summary: lib components for the R-fastmap package.
@@ -33,21 +29,22 @@ lib components for the R-fastmap package.
 
 %prep
 %setup -q -c -n fastmap
+cd %{_builddir}/fastmap
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571827259
+export SOURCE_DATE_EPOCH=1589511224
 
 %install
-export SOURCE_DATE_EPOCH=1571827259
+export SOURCE_DATE_EPOCH=1589511224
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
