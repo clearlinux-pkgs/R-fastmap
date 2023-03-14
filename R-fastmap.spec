@@ -4,17 +4,15 @@
 #
 Name     : R-fastmap
 Version  : 1.1.1
-Release  : 26
+Release  : 27
 URL      : https://cran.r-project.org/src/contrib/fastmap_1.1.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fastmap_1.1.1.tar.gz
 Summary  : Fast Data Structures
 Group    : Development/Tools
 License  : MIT
 Requires: R-fastmap-lib = %{version}-%{release}
+Requires: R-fastmap-license = %{version}-%{release}
 BuildRequires : buildreq-R
-# Suppress stripping binaries
-%define __strip /bin/true
-%define debug_package %{nil}
 
 %description
 store, stack, and queue. Environments are commonly used as key-value stores
@@ -26,9 +24,18 @@ store, stack, and queue. Environments are commonly used as key-value stores
 %package lib
 Summary: lib components for the R-fastmap package.
 Group: Libraries
+Requires: R-fastmap-license = %{version}-%{release}
 
 %description lib
 lib components for the R-fastmap package.
+
+
+%package license
+Summary: license components for the R-fastmap package.
+Group: Default
+
+%description license
+license components for the R-fastmap package.
 
 
 %prep
@@ -40,11 +47,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1677261185
+export SOURCE_DATE_EPOCH=1678818269
 
 %install
-export SOURCE_DATE_EPOCH=1677261185
+export SOURCE_DATE_EPOCH=1678818269
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/R-fastmap
+cp %{_builddir}/fastmap/LICENSE.note %{buildroot}/usr/share/package-licenses/R-fastmap/15211d8f49cbae47a72108a4132b9ef272343557 || :
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
@@ -119,3 +128,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/fastmap/libs/fastmap.so
 /usr/lib64/R/library/fastmap/libs/fastmap.so.avx2
 /usr/lib64/R/library/fastmap/libs/fastmap.so.avx512
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/R-fastmap/15211d8f49cbae47a72108a4132b9ef272343557
