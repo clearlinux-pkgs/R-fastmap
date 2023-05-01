@@ -4,7 +4,7 @@
 #
 Name     : R-fastmap
 Version  : 1.1.1
-Release  : 28
+Release  : 29
 URL      : https://cran.r-project.org/src/contrib/fastmap_1.1.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fastmap_1.1.1.tar.gz
 Summary  : Fast Data Structures
