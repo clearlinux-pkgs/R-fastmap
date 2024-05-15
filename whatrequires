@@ -1,4 +1,6 @@
 # This file contains recursive sources that require this package
+R-bslib
 R-cachem
 R-htmltools
+R-promises
 R-shiny
